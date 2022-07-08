@@ -32,12 +32,12 @@
 </head>
 <body>
     <div class="container-fluid text-center mr-auto d-flex justify-content-center center bg-image">
-        <div class="card border-0 shadow-lg bg-transparent">
+        <div class="card border-0 shadow-lg bg-transparent" style="width: 36rem;">
             <div class="card-body text-center">
                 <h5 class="card-title text-dark">Weather app</h5>
-                <input type="text" class="form-control mb-3 bg-transparent border-top-0 border-left-0 border-right-0 text-dark text-uppercase" id="location" placeholder="Search by City Name" aria-label="Seacrch by City Name" aria-describedby="basic-addon1">
+                <input type="text" class="form-control mb-3 bg-transparent text-center border-top-0 border-left-0 border-right-0 text-dark text-uppercase" id="location" placeholder="Search by City Name" aria-label="Seacrch by City Name" aria-describedby="basic-addon1">
                 <span>
-                    <h2 class="card-subtitle mb-2 text-dark text-uppercase" id="city"></h2>
+                    <h2 class="card-subtitle mb-2 text-dark text-uppercase" id="city">City Name</h2>
                     <h5 class="card-text text-dark mb-1" id="country"></h5>
                 </span>
                 <p class="card-text text-center text-dark"><img src="" alt="" id="icon"> <span id="temp" class="text-center text-dark h2"></span><span class="h3"><sup>&deg;</sup>C</span> </p>
@@ -87,7 +87,13 @@
                         data.name = 'Temp.';
                     }
                     console.log(data);
-                    document.getElementById('city').innerHTML = data.name;
+                    console.log(data.cod + "sd")
+                    if (data.cod == "404") {
+
+                        document.getElementById('city').innerHTML = "Please Enter city Name";
+                    } else {
+                        document.getElementById('city').innerText = data.name;
+                    }
                     document.getElementById('temp').innerHTML = Math.floor(data.main.temp);
                     document.getElementById('country').innerHTML = data.sys.country;
                     document.getElementById('conditions').innerHTML = data.weather[0].description;
@@ -100,8 +106,9 @@
                     // document.getElementById('icon').src = icons + data.weather[0].icon + "@2x.png";
                     // console.log(data.wind.speed + " sd");
                     // document.getElementById('temp').innerHTML = Math.floor(temp_max);
+
                 });
         }
+
     }
-    WeatherApp.fetchWeather();
 </script>
