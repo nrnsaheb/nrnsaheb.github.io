@@ -9,12 +9,16 @@
     <title>Read A Hadith</title>
     <style>
         #intro {
-        background: url("../images/hadithbg.jpg") center no-repeat;
-        height: 100vh;
-      }
+            background: url("../images/hadithbg.jpg") center no-repeat;
+            height: 100vh;
+        }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://nrnsaheb.github.io/">
+            < Back</a>
+    </nav>
     <div id="intro" class="bg-image shadow-2-strong">
         <div class="container">
             <div class="container">
@@ -28,32 +32,31 @@
                     <h6>Chapter Number: <small id="chapterNumber" class="text-uppercase h6 fw-normal"></small></h6>
                     <h6>Chapter Name: <small id="chapterName" class="text-uppercase h6 fw-normal"></small></h6>
                     <h6>Hadith Number: <small id="hadithNumber" class="text-uppercase h6 fw-normal"></small></h6>
-                    <p class="my-5 h6 text-info fw-bolder fst-italic">
-                        Referesh to read another random hadith.
-                    </p>
+                    <p class="my-5 h6 text-info fw-bolder fst-italic"> Referesh to read another random hadith. </p>
                 </div>
             </div>
         </div>
     </div>
+    <footer class="bg-white text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3"> © 2022 Copyright <a class="text-dark text-decoration-none fw-bold" href="#">Nooruddin Saheb</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
 </body>
 <script>
-     let y = Math.floor((Math.random() * 1631));
+    let y = Math.floor((Math.random() * 1631));
     const apiUrl = `https://www.hadithapi.com/api/hadiths?paginate=${y}&apiKey=$2y$10$FfmYgmLryP2EHr0C6KMtfOaG54C49v0fULEm8xczEWCnniEfYb3`;
     // console.log(y);
     fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {
             let last = data.hadiths.data.length;
-            console.log(data.hadiths.data.length);
-            // for (let i = 0; i <9; i++) {
-            //     console.log(i);
-            //     // console.log(datasTwo);
-            // }
-
+            // console.log(data.hadiths.data.length);
             let id = Math.floor((Math.random() * last) + 1);
-            console.log(id);
+            // console.log(id);
             // console.log(data.hadiths.data[id].chapter.bookSlug);
-            console.log(data.hadiths.data[id].chapter.chapterNumber);
+            // console.log(data.hadiths.data[id].chapter.chapterNumber);
             // console.log(data.hadiths.data[id].chapter.chapterEnglish);
             // console.log(datasTwo?.data?.length);
             // console.log(data.hadiths.data[id].englishNarrator);
