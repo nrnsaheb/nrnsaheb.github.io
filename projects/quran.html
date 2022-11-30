@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Read A Quranic Verse</title>
+    <style>
+        #intro {
+            background: url("../images/hadithbg.jpg") center no-repeat;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="intro" class="bg-image shadow-2-strong">
+        <div class="container">
+            <div class="container">
+                <div class="py-5 text-center text-white py-sm-5">
+                    <h5>Read a Random Quranic Verse</h5>
+                    <h6><small id="narrator" class="text-uppercase h6 fw-normal"></small></h6>
+                    <h6>Translation: <small id="ayat" class="text-uppercase h6 fw-normal"></small></h6>
+                    <br>
+                    <h5>Reference</h5>
+                    <h6>Verse Name: <small id="verseNumber" class="text-uppercase h6 fw-normal"></small></h6>
+                    <h6>Ruku Number: <small id="ruku_number" class="text-uppercase h6 fw-normal"></small></h6>
+                    <h6>Manzil Number: <small id="manzil_number" class="text-uppercase h6 fw-normal"></small></h6>
+                    <h6>Juz/Para Number: <small id="juz_number" class="text-uppercase h6 fw-normal"></small></h6>
+                    <p class="my-5 h6 text-info fw-bolder fst-italic"> Referesh to read another random Quranic Verse. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script>
+    let ayah = Math.floor((Math.random() * 6348));
+    const apiUrl = "https://api.alquran.cloud/ayah/" + ayah + "/en.asad";
+    fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            // console.log(data);
+
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    // let y = Math.floor((Math.random() * 1631));
+    function compare(a, b) {
+        if (a.position < b.position) {
+            return -1;
+        }
+        if (a.position > b.position) {
+            return 1;
+        }
+        return 0;
+    }
+    const apiUrl2 = `https://api.quran.com/api/v4/verses/random?language=en&words=true&translations=en&audio=1&tafsirs=en`;
+    fetch(apiUrl2)
+        .then((response) => response.json())
+        .then(data => {
+
+            // console.log(data);
+            data.verse.words.sort(compare);
+            for (let i = 0; i < data.verse.words.length; i++) {
+                // var result = Object.values(data.words[i]);
+                let datas = data.verse.words[i];
+                // console.log(datas.translation.text);
+                // console.log(datas.sort());
+                // let sorted=datas.position;
+                // const propertyNames=Object.keys(sorted); 
+                // console.log(sorted);
+
+                // console.log(result.sort());
+                document.getElementById('ayat').innerHTML += ' ' + datas.translation.text;
+                // if (datas.position <= i) {
+                //     let ayah = [];
+                //     ayah.push();
+                //     console.log(ayah[i]);
+                // }
+            }
+
+            document.getElementById('verseNumber').innerHTML += ' ' + data.verse.verse_number;
+            document.getElementById('ruku_number').innerHTML += ' ' + data.verse.ruku_number;
+            document.getElementById('manzil_number').innerHTML += ' ' + data.verse.manzil_number;
+            document.getElementById('juz_number').innerHTML += ' ' + data.verse.juz_number;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+</script>
+</html>
