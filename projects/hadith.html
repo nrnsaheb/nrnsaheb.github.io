@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Read a Random Hadith</title>
+    <style>
+        #intro {
+        background: url("../images/hadithbg.jpg") center no-repeat;
+        height: 100vh;
+      }
+    </style>
+</head>
+<body>
+    <div id="intro" class="bg-image shadow-2-strong">
+        <div class="container">
+            <div class="container">
+                <div class="py-5 text-center text-white py-sm-5">
+                    <h5>Read a Random Hadith From SAHIH-BUKHARI</h5>
+                    <h6><small id="narrator" class="text-uppercase h6 fw-normal"></small></h6>
+                    <h6><small id="hadith" class="text-uppercase h6 fw-normal"></small></h6>
+                    <br>
+                    <h5>Reference</h5>
+                    <h6>Book Name: <small id="book" class="text-uppercase h6 fw-normal"></small></h6>
+                    <h6>Chapter Number: <small id="chapterNumber" class="text-uppercase h6 fw-normal"></small></h6>
+                    <h6>Chapter Name: <small id="chapterName" class="text-uppercase h6 fw-normal"></small></h6>
+                    <h6>Hadith Number: <small id="hadithNumber" class="text-uppercase h6 fw-normal"></small></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+     let y = Math.floor((Math.random() * 1631));
+    const apiUrl = `https://www.hadithapi.com/api/hadiths?paginate=${y}&apiKey=$2y$10$FfmYgmLryP2EHr0C6KMtfOaG54C49v0fULEm8xczEWCnniEfYb3`;
+    // console.log(y);
+    fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            let last = data.hadiths.data.length;
+            console.log(data.hadiths.data.length);
+            // for (let i = 0; i <9; i++) {
+            //     console.log(i);
+            //     // console.log(datasTwo);
+            // }
+
+            let id = Math.floor((Math.random() * last) + 1);
+            console.log(id);
+            // console.log(data.hadiths.data[id].chapter.bookSlug);
+            console.log(data.hadiths.data[id].chapter.chapterNumber);
+            // console.log(data.hadiths.data[id].chapter.chapterEnglish);
+            // console.log(datasTwo?.data?.length);
+            // console.log(data.hadiths.data[id].englishNarrator);
+            // console.log(data.hadiths.data[id].hadithEnglish);
+            document.getElementById('book').innerHTML = data.hadiths.data[id].chapter.bookSlug;
+            document.getElementById('chapterName').innerHTML = data.hadiths.data[id].chapter.chapterEnglish;
+            document.getElementById('chapterNumber').innerHTML = data.hadiths.data[id].chapter.chapterNumber;
+            document.getElementById('hadith').innerHTML = data.hadiths.data[id].hadithEnglish;
+            document.getElementById('narrator').innerHTML = data.hadiths.data[id].englishNarrator;
+            document.getElementById('hadithNumber').innerHTML = data.hadiths.data[id].hadithNumber;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+</script>
+</html>
