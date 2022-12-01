@@ -118,9 +118,6 @@
 
 
         });
-
-    // With Search.
-    
     const options = {
         method: 'GET',
         headers: {
@@ -135,6 +132,8 @@
             // console.log(locations.value);
         }
     });
+
+    // With Search.
     let SalahApp = {
         fetchSalah: (query) => {
             fetch(`https://muslimsalat.p.rapidapi.com/${query}.json`, options)
