@@ -17,6 +17,7 @@
         <div class="mx-auto">
             <div class="my-3 text-center">
                 <h2 class="text-center mb-2">Salah timing*</h2>
+                <input type="text" class="form-control mb-3 bg-transparent text-center text-dark text-uppercase w-50 m-auto" id="location" placeholder="Search by City Name" aria-label="Seacrch by City Name" aria-describedby="basic-addon1">
                 <h6 class="text-center">Today's Date and Time: <span id="date"></span></h6>
                 <p class="my-0">Qibla Direction: <span id="qibla_direction"></span></p>
                 <p class="my-0">Place: <span id="city"></span> <span id="state"></span> <span id="country"></span></p>
@@ -74,18 +75,15 @@
                 </div>
             </div>
             <div class="my-4">
-                <p class="my-0 small"><small> *LMT="Local Mean Time(Which is same as your local time)" </small>
-                </p>
-                <p class="my-0 small"><small> *All times are based on the calculations of "University Of Islamic Sciences, Karachi (Hanafi)"</small> </p>
+                <p class="my-0 h6"> *All times are based on the calculations of <span id="prayer_method_name"></span></p>
             </div>
         </div>
-        
-    <footer class="text-center text-lg-start">
-        <!-- Copyright -->
-        <div class="text-center p-3"> © 2022 Copyright <a class="text-dark text-decoration-none fw-bold" href="#">Nooruddin Saheb</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
+        <footer class="text-center text-lg-start">
+            <!-- Copyright -->
+            <div class="text-center p-3"> © 2022 Copyright <a class="text-dark text-decoration-none fw-bold" href="#">Nooruddin Saheb</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
     </div>
 </body>
 <script>
@@ -95,7 +93,7 @@
     const day = date.getDate();
     const Year = date.getYear();
     let Today = `${month}+${Year}`
-    fetch(`https://api.aladhan.com/v1/calendarByAddress?address=anas%20Masjid,%20Msk,,%20Mill,%20Gulbarga,%20Karnataka,%20India&method=1&month=${month}&year=${Year}`)
+    fetch(`https://api.aladhan.com/v1/calendarByAddress?address=pune&method=1&month=${month}&year=${Year}`)
         .then((response) => response.json()).then(data => {
 
             // let day=31
@@ -118,23 +116,38 @@
             'X-RapidAPI-Host': 'muslimsalat.p.rapidapi.com'
         }
     };
+    const locations = document.querySelector('#location');
+    locations.addEventListener('keypress', (evt) => {
+        if (evt.keyCode == 13) {
+            SalahApp.fetchSalah(locations.value);
+            // console.log(locations.value);
+        }
+    });
 
-    fetch(`https://muslimsalat.p.rapidapi.com/gulbarga.json`, options)
-        .then(response => response.json()).then(response => {
-            // console.log(response.items[0].fajr);
-            document.getElementById('fajr2').innerHTML = response.items[0].fajr;
-            document.getElementById('zohr2').innerHTML = response.items[0].dhuhr;
-            document.getElementById('Asr2').innerHTML = response.items[0].asr;
-            document.getElementById('Maghrib2').innerHTML = response.items[0].maghrib;
-            document.getElementById('Isha2').innerHTML = response.items[0].isha;
-            document.getElementById('city').innerHTML = response.city;
-            document.getElementById('qibla_direction').innerHTML = response.qibla_direction;
-            document.getElementById('state').innerHTML = response.state;
-            document.getElementById('country').innerHTML = response.country;
-            document.getElementById('longitude').innerHTML = response.longitude;
-            document.getElementById('latitude').innerHTML = response.latitude;
+    // With Search.
+    let SalahApp = {
+        fetchSalah: (query) => {
+            fetch(`https://muslimsalat.p.rapidapi.com/${query}.json`, options)
+                .then(response => response.json()).then(response => {
+                    console.log(query);
+                    // console.log(response.items[0].fajr);
+                    document.getElementById('fajr2').innerHTML = response.items[0].fajr;
+                    document.getElementById('zohr2').innerHTML = response.items[0].dhuhr;
+                    document.getElementById('Asr2').innerHTML = response.items[0].asr;
+                    document.getElementById('Maghrib2').innerHTML = response.items[0].maghrib;
+                    document.getElementById('Isha2').innerHTML = response.items[0].isha;
+                    document.getElementById('city').innerHTML = response.city;
+                    document.getElementById('qibla_direction').innerHTML = response.qibla_direction;
+                    document.getElementById('state').innerHTML = response.state;
+                    document.getElementById('country').innerHTML = response.country;
+                    document.getElementById('longitude').innerHTML = response.longitude;
+                    document.getElementById('latitude').innerHTML = response.latitude;
+                    document.getElementById('prayer_method_name').innerHTML = response.prayer_method_name;
 
-        });
+                });
+        }
+    }
+
 
 
 </script>
