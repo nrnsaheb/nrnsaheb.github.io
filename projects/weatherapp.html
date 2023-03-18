@@ -92,7 +92,7 @@
             // console.log(location);
             // location
             // fetch('https://api.openweathermap.org/data/2.5/weather?q=' + document.getElementsById("location")[0].value + '&appid=' + apiKey)
-            console.log(query + "query");
+            console.log(query);
             fetch(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=metric`)
                 .then((response) => response.json()).then(data => {
                     // if (typeof data.name === "undefined") {

@@ -100,7 +100,7 @@
     const date = new Date();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    const Year = date.getYear();
+    const Year = date.getFullYear();
     let Today = `${month}+${Year}`
     fetch(`https://api.aladhan.com/v1/calendarByAddress?address=pune&method=1&month=${month}&year=${Year}`)
         .then((response) => response.json()).then(data => {

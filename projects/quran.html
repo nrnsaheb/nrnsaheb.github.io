@@ -56,21 +56,22 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 <script>
-    $.each($('*'), function () { if ($(this).width() > $('body').width()) { console.log($(this).get(0)); } }).length;
-    let ayah = Math.floor((Math.random() * 6348));
-    const apiUrl = "https://api.alquran.cloud/ayah/" + ayah + "/en.asad";
-    fetch(apiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-            // console.log(data);
+    // $.each($('*'), function () { if ($(this).width() > $('body').width()) { console.log($(this).get(0)); } }).length;
+    // let ayah = Math.floor((Math.random() * 6348));
+    // const apiUrl = `https://api.alquran.cloud/ayah/${ayah}/en.asad`;
+    // fetch(apiUrl)
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //         console.log(data);
 
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     });
     // let y = Math.floor((Math.random() * 1631));
     function compare(a, b) {
         if (a.position < b.position) {
+            // console.log(a.position);
             return -1;
         }
         if (a.position > b.position) {
@@ -84,9 +85,12 @@
             .then((response) => response.json())
             .then(data => {
 
-                // console.log(data.verse.verse_key);
+                // console.log(data.verse);
+                // console.log(compare.position);
                 data.verse.words.sort(compare);
+                // console.log(data.verse.words.sort(compare));
                 for (let i = 0; i < data.verse.words.length; i++) {
+                    
                     // var result = Object.values(data.words[i]);
                     let datas = data.verse.words[i];
                     // console.log(datas.translation.text);
@@ -112,6 +116,7 @@
                 return fetch(`https://api.quran.com/api/v4/quran/verses/uthmani?juz_number=${data.verse.juz_number}&verse_key=${data.verse.verse_key}`)
                     .then((response) => response.json())
                     .then(dataTwo => {
+                        console.log("dt");
                         console.log(dataTwo.verses);
                         // dataTwo.verse.words.sort(compare);
                         for (let i = 0; i < dataTwo.verses.length; i++) {
