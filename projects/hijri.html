@@ -108,7 +108,7 @@
     const day = date.getDate();
     const year = date.getFullYear();
     let Today = `${month}+${year}`;
-    fetch(`http://api.aladhan.com/v1/gToH?date=${day}-${month}-${year}`)
+    fetch(`https://api.aladhan.com/v1/gToH?date=${day}-${month}-${year}`)
         .then(response => response.json()).then(response => {
 
             // console.log(day + ' ' + month + ' ' + year + '' + Today);
@@ -145,7 +145,7 @@
     // With Search.
     let SalahApp = {
         fetchSalah: (query) => {
-            fetch(`http://api.aladhan.com/v1/gToH?date=${dayCustom.value}-${monthCustom.value}-${yearCustom.value}`)
+            fetch(`https://api.aladhan.com/v1/gToH?date=${dayCustom.value}-${monthCustom.value}-${yearCustom.value}`)
                 .then(response => response.json()).then(response => {
                     // console.log(response);
                     // console.log(response.items[0].fajr);
@@ -242,8 +242,8 @@
             let vav = response.data;
 
             document.getElementById('eMonth').innerText = vav[0].gregorian.month.en;
-            document.getElementById('aMonth').innerText = vav[0].hijri.month.en;
-
+            document.getElementById('aMonth').innerText = vav[30].hijri.month.en;
+console.log(vav[30].hijri.month.en);
             // For loop to fetch all the dates from the API.
             for (let i = 0; i < response.data.length; i++) {
                 var y = response.data[i].gregorian.day;

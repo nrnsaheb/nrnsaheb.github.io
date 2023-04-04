@@ -10,15 +10,20 @@
     <style>
         #intro {
             background: url("../images/hadithbg.jpg") center no-repeat;
-            height: 100vh;
+            /* Full height */
+            height: 100%;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
 </head>
-<body>
-    <div id="intro" class="bg-image shadow-2-strong">
+<body id="intro" >
+    <div class="bg-image shadow-2-strong">
         <nav class="navbar navbar-expand-lg navbar-transparent text-white">
             <a class="navbar-brand text-white px-5" href="https://nrnsaheb.github.io/">
-                < Back</a>
+                &DoubleLeftArrow; Back</a>
         </nav>
         <div class="container">
             <div class="container">
@@ -32,7 +37,7 @@
                     <h6>Chapter Number: <small id="chapterNumber" class="text-uppercase h6 fw-normal"></small></h6>
                     <h6>Chapter Name: <small id="chapterName" class="text-uppercase h6 fw-normal"></small></h6>
                     <h6>Hadith Number: <small id="hadithNumber" class="text-uppercase h6 fw-normal"></small></h6>
-                    <p class="my-5 h6 text-info fw-bolder fst-italic"> Refresh to read another random hadith. </p>
+                    <p class="my-5 h6 text-info fw-bolder fst-italic"><button class="btn btn-success" onclick="location.reload()">Read Another Hadith</button></p>
                 </div>
             </div>
         </div>
