@@ -37,12 +37,13 @@
     const Cyear = Cdate.getFullYear();
 
     const currentMonth = `https://api.aladhan.com/v1/gToHCalendar/${Cmonth}/${Cyear}`;
+    console.log(currentMonth);
     fetch(currentMonth)
         .then(response => response.json()).then(response => {
 
             var containers = document.getElementById('hCalendar');
             let vav = response.data;
-
+console.log(response.data);
             document.getElementById('eMonth').innerText = vav[0].gregorian.month.en;
             document.getElementById('aMonth').innerText = vav[0].hijri.month.en;
 
@@ -97,8 +98,6 @@
             }
 
         });
-let asdfas =123432432432432;
-console.log(asdfas.toLocaleString("ar-EG"));
 </script>
 <style type="text/css">
     body {
