@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Counter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        background-color: #7832ec;
+    }
+
+    /* Container */
+    .container {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Button */
+    #clickButton {
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background-color: #87ceeb;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+        width: 200px;
+        height: 200px;
+    }
+
+    #clickButton:hover {
+        background-color: #a5a5a5;
+        transform: scale(1.1);
+    }
+
+    /* Count Display */
+    #count {
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+</style>
+<body>
+    <div class="container">
+        <p id="count"></p>
+        <button id="clickButton">Click me!</button>
+    </div>
+</body>
+<script>
+    // Declare count variable
+    var count = 0;
+
+    // Typewriter effect function
+    function typeWriter(text, i, cb) {
+        if (i < text.length) {
+            document.getElementById("count").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(function () {
+                typeWriter(text, i, cb);
+            }, 50); // Adjust typing speed here (in milliseconds)
+        } else {
+            cb();
+        }
+    }
+
+    // Initial text to display (empty)
+    var initialText = '';
+
+    // Call the typewriter effect function
+    typeWriter(initialText, 0, function () {
+        // Once the typewriter effect finishes, you can set the actual count here if needed
+        document.getElementById("count").innerText = count;
+    });
+
+    // Click event listener for the button (you can keep your existing button click logic here)
+    document.getElementById("clickButton").addEventListener('click', function () {
+        // Increment count
+        count++;
+        // Update count display
+        document.getElementById("count").innerText = count;
+    });
+
+</script>
+</html>
